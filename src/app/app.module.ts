@@ -4,10 +4,15 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { LoginService } from './services/login/login.service';
 import { RegisterService } from './services/register/register.service';
+import { MachineService } from './services/machine/machine.service';
+import { MakesService } from './services/makes/makes.service';
+import { DellService } from './services/dell/dell.service';
+import { DataService } from './services/data/data.service';
 
 // Import containers
 import {
@@ -79,7 +84,8 @@ import { ChartsModule } from 'ng2-charts/ng2-charts';
     BsDropdownModule.forRoot(),
     TabsModule.forRoot(),
     ChartsModule,
-    HttpModule
+    HttpModule,
+    HttpClientModule
   ],
   declarations: [
     AppComponent,
@@ -89,7 +95,11 @@ import { ChartsModule } from 'ng2-charts/ng2-charts';
   ],
   providers: [
     LoginService,
-    RegisterService
+    RegisterService,
+    MachineService,
+    MakesService,
+    DellService,
+    DataService
     ,{
     provide: LocationStrategy,
     useClass: HashLocationStrategy

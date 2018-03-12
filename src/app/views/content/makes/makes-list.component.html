@@ -1,0 +1,21 @@
+<div class="animated slideIn">
+  <div class="card">
+    <div class="card-header">Makes List</div>
+    <div class="card-body">
+
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>MAKE</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let make of makes">
+            <td><a routerLink="/content/makes/makes-detail/{{make.make}}">{{make.make}}</a></td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+</div>

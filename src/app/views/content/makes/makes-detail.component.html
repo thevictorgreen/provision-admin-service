@@ -1,0 +1,81 @@
+<div class="animated slideIn">
+
+
+  <div class="row"><!-- begin row -->
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header"><span style="color:green;">MAKE DETAILS</span></div>
+        <div class="card-body">
+
+          <div class="form-group">
+            <label for="make">MAKE</label>
+            <input id="make" [(ngModel)]="make.make" type="text" class="form-control" placeholder="MAKE" readonly>
+          </div>
+
+        </div>
+        <div class="card-footer">
+          <!--<button (click)="save()" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i> EDIT</button>
+          <button (click)="remove()" class="btn btn-sm btn-warning"><i class="fa fa-ban"></i> REMOVE</button>-->
+          <button (click)="cancel()" class="btn btn-sm btn-secondary"><i class="fa fa-ban"></i> CANCEL</button>
+        </div>
+      </div>
+    </div>
+  </div><!-- end row -->
+
+
+  <div class="row"><!-- begin row -->
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header"><span style="color:green;">CURRENT MODELS</span></div>
+        <div class="card-body">
+
+          <div class="form-group">
+            <label>MODELS</label>
+          </div>
+
+          <div class="form-group" *ngFor="let modelname of make.models; index as i">
+            <div *ngIf="i == 0">
+              <input [(ngModel)]="make.models[i]" type="text" class="form-control" placeholder="MODEL" readonly>
+            </div>
+
+            <div *ngIf="i > 0">
+              <input [(ngModel)]="make.models[i]" type="text" class="form-control" placeholder="MODEL">
+            </div>
+            <!--<input [(ngModel)]="make.models[i]" type="text" class="form-control" placeholder="MODEL">-->
+          </div>
+
+        </div>
+        <div class="card-footer">
+          <button (click)="save()" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i> EDIT</button>
+          <button (click)="cancel()" class="btn btn-sm btn-secondary"><i class="fa fa-ban"></i> CANCEL</button>
+        </div>
+      </div>
+    </div>
+  </div><!-- end row -->
+
+
+  <div class="row"><!-- begin row -->
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header"><span style="color:green;">NEW MODELS (COMMA SEPARATED)</span></div>
+        <div class="card-body">
+
+          <div class="form-group">
+            <label>NEW MODELS</label>
+          </div>
+
+          <div class="form-group">
+            <input [(ngModel)]="new_models" type="text" class="form-control" placeholder="MODEL(S)">
+          </div>
+
+        </div>
+        <div class="card-footer">
+          <button (click)="save()" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i> EDIT</button>
+          <button (click)="cancel()" class="btn btn-sm btn-secondary"><i class="fa fa-ban"></i> CANCEL</button>
+        </div>
+      </div>
+    </div>
+  </div><!-- end row -->
+
+
+</div>

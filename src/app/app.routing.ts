@@ -51,16 +51,20 @@ export const routes: Routes = [
         loadChildren: './views/content/dashboard/dashboard.module#DashboardModule'
       },
       {
-        path: 'components',
-        loadChildren: './views/content/components/components.module#ComponentsModule'
+        path: 'machines',
+        loadChildren: './views/content/machines/machines.module#MachinesModule'
       },
       {
-        path: 'icons',
-        loadChildren: './views/content/icons/icons.module#IconsModule'
+        path: 'makes',
+        loadChildren: './views/content/makes/makes.module#MakesModule'
       },
       {
-        path: 'forms',
-        loadChildren: './views/content/forms/forms.module#FormsModule'
+        path: 'models',
+        loadChildren: './views/content/models/models.module#ModelsModule'
+      },
+      {
+        path: 'users',
+        loadChildren: './views/content/users/users.module#UsersModule'
       }
     ]
   }

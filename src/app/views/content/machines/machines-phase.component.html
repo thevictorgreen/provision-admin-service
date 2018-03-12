@@ -1,0 +1,47 @@
+<div class="animated slideIn">
+  <div class="card">
+    <div class="card-header">Machines List</div>
+    <div class="card-body">
+
+
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Serial Number</th>
+            <th>Make</th>
+            <th>Model</th>
+            <th>Status</th>
+            <th>Logs</th>
+          </tr>
+        </thead>
+        <tbody>
+
+          <tr *ngFor="let machine of machines">
+
+
+            <td *ngIf="machine.provisioning_status === phase "><a routerLink="/content/machines/machines-detail/{{machine._id}}">{{machine.serial_number}}</a></td>
+            <td *ngIf="machine.provisioning_status === phase ">{{machine.make_model.make}}</td>
+            <td *ngIf="machine.provisioning_status === phase ">{{machine.make_model.model}}</td>
+            <td *ngIf="machine.provisioning_status === phase ">
+              <div *ngIf="machine.provisioning_status === 'IN-BOX' ">
+                <span class="badge badge-danger">IN-BOX</span>
+              </div>
+
+              <div *ngIf="machine.provisioning_status === 'SETUP' ">
+                <span class="badge badge-warning">SETUP</span>
+              </div>
+
+              <div *ngIf="machine.provisioning_status === 'IN-USE' ">
+                <span class="badge badge-success">IN-USE</span>
+              </div>
+            </td>
+            <td *ngIf="machine.provisioning_status === phase "><a routerLink="/content/machines/machines-log/{{machine._id}}">VIEW-LOGS</a></td>
+
+          </tr>
+        </tbody>
+      </table>
+
+
+    </div>
+  </div>
+</div>

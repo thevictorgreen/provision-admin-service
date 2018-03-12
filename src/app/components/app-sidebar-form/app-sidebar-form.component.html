@@ -1,5 +1,7 @@
-<form class="sidebar-form">
+<!--<form class="sidebar-form">-->
+<div class="sidebar-form">
   <div class="form-group p-2 mb-0">
-    <input type="text" class="form-control" aria-describedby="search" placeholder="Search...">
+    <input [(ngModel)]="value" (change)="search()" type="text" class="form-control" aria-describedby="search" placeholder="Search CD#, Branch, Div...">
   </div>
-</form>
+</div>
+<!--</form>-->

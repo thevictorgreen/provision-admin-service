@@ -1,0 +1,30 @@
+<div class="animated slideIn">
+  <div class="card">
+    <div class="card-header">Machine Logs For {{machine.serial_number}}</div>
+    <div class="card-body">
+
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Time Changed</th>
+            <th>User</th>
+            <th>Updated Field</th>
+            <th>Value</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let log of machine.provisioning_log;index as i">
+            <td>{{machine.provisioning_log[i].time}}</td>
+            <td>{{machine.provisioning_log[i].user}}</td>
+            <td>{{machine.provisioning_log[i].field}}</td>
+            <td>{{machine.provisioning_log[i].value}}</td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+    <div class="card-footer">
+      <button (click)="cancel()" class="btn btn-sm btn-secondary"><i class="fa fa-ban"></i> CANCEL</button>
+    </div>
+  </div>
+</div>

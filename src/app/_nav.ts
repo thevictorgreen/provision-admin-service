@@ -2,99 +2,81 @@ export const navigation = [
   {
     name: 'Dashboard',
     url: '/content/dashboard',
-    icon: 'icon-speedometer',
-    badge: {
-      variant: 'info',
-      text: 'NEW'
-    }
+    icon: 'icon-speedometer'
   },
   {
     title: true,
-    name: 'UI elements'
+    name: 'Data Collections'
   },
   {
-    name: 'Components',
-    url: '/content/components',
-    icon: 'icon-puzzle',
+    name: 'Machines',
+    url: '/content/machines',
+    icon: 'fa fa-server',
     children: [
       {
-        name: 'Buttons',
-        url: '/content/components/buttons',
-        icon: 'icon-puzzle'
+        name: 'List',
+        url: '/content/machines/machines-list',
+        icon: 'fa fa-server'
       },
       {
-        name: 'Social Buttons',
-        url: '/content/components/social-buttons',
-        icon: 'icon-puzzle'
+        name: 'Search',
+        url: '/content/machines/machines-search/search',
+        icon: 'fa fa-server'
       },
       {
-        name: 'Cards',
-        url: '/content/components/cards',
-        icon: 'icon-puzzle'
+        name: 'Add All',
+        url: '/content/machines/machines-add',
+        icon: 'fa fa-server'
       },
       {
-        name: 'Forms',
-        url: '/content/components/forms',
-        icon: 'icon-puzzle'
-      },
-      {
-        name: 'Modals',
-        url: '/content/components/modals',
-        icon: 'icon-puzzle'
-      },
-      {
-        name: 'Switches',
-        url: '/content/components/switches',
-        icon: 'icon-puzzle'
-      },
-      {
-        name: 'Tables',
-        url: '/content/components/tables',
-        icon: 'icon-puzzle'
-      },
-      {
-        name: 'Tabs',
-        url: '/content/components/tabs',
-        icon: 'icon-puzzle'
+        name: 'Add Dell',
+        url: '/content/machines/machines-add-dell',
+        icon: 'fa fa-server'
       }
     ]
   },
   {
-    name: 'Icons',
-    url: '/content/icons',
-    icon: 'icon-star',
+    name: 'Makes & Models',
+    url: '/content/makes',
+    icon: 'fa fa-file-code-o',
     children: [
       {
-        name: 'Font Awesome',
-        url: '/content/icons/font-awesome',
-        icon: 'icon-star',
-        badge: {
-          variant: 'secondary',
-          text: '4.7'
-        }
+        name: 'List',
+        url: '/content/makes/makes-list',
+        icon: 'fa fa-file-code-o'
       },
       {
-        name: 'Simple Line Icons',
-        url: '/content/icons/simple-line-icons',
-        icon: 'icon-star'
+        name: 'Add',
+        url: '/content/makes/makes-add',
+        icon: 'fa fa-file-code-o'
       }
     ]
   },
   {
-    name: 'Forms',
-    url: '/content/forms',
-    icon: 'icon-note',
+    name: 'Users',
+    url: '/content/users',
+    icon: 'fa fa-users',
     children: [
       {
-        name: 'Basic Forms',
-        url: '/content/forms/basic-forms',
-        icon: 'icon-note'
+        name: 'List',
+        url: '/content/users/users-list',
+        icon: 'fa fa-users'
       },
       {
-        name: 'Advanced Forms',
-        url: '/content/forms/advanced-forms',
-        icon: 'icon-note'
+        name: 'Detail',
+        url: '/content/users/users-detail',
+        icon: 'fa fa-users'
       },
+      {
+        name: 'Search',
+        url: '/content/users/users-search',
+        icon: 'fa fa-users'
+      },
+      {
+        name: 'Add',
+        url: '/content/users/users-add',
+        icon: 'fa fa-users'
+      }
     ]
   }
 ];

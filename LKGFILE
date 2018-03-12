@@ -1,0 +1,32 @@
+import { Injectable } from '@angular/core';
+import {Headers, Http, RequestOptions } from '@angular/http';
+
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+//import 'rxjs/add/operator/map';
+
+import { Observable } from 'rxjs/Observable';
+import { of } from 'rxjs/observable/of';
+import { catchError, map, tap } from 'rxjs/operators';
+import { Machine } from '../../models/machines/machine';
+
+const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+};
+
+@Injectable()
+export class MachineService {
+
+  private url:string = "http://localhost:3000/machines";
+
+
+  constructor(public http:Http) {}
+
+  getAllMachines() {
+    let headers = new Headers();
+    headers.append('Content-Type','application/json');
+    let opts = new RequestOptions();
+    opts.headers = headers;
+    return this.http.get(this.url,opts).map(res => res.json());
+  }
+
+}

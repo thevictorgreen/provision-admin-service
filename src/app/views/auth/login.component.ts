@@ -1,13 +1,15 @@
-import { Component } from '@angular/core';
+import { Component,OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginService } from '../../services/login/login.service';
+import { DataService } from '../../services/data/data.service';
+
 import { FormsModule } from '@angular/forms';
 import { NgIf } from '@angular/common';
 
 @Component({
   templateUrl: 'login.component.html'
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
 
   showSuccess:boolean = false;
   showError:boolean = false;
@@ -19,29 +21,45 @@ export class LoginComponent {
 
   user = {
     username: '',
-    password: '',
-    officeid: ''
+    password: ''
   }
 
+  loggedInUser:string;
+
   authRequest = {
-    username: '',
-    password: '',
-    relaystate: '/myapp/some/deep/link/i/want/to/return/to',
-    options: {
-      multiOptionalFactorEnroll: false,
-      warnBeforePasswordExpired: false
+    auth: {
+      "username":'',
+      "password":''
     }
   }
 
   authResult:any;
 
-  constructor(private router: Router, public loginService:LoginService) {
+  message:string;
+
+  constructor(private router: Router, public loginService:LoginService, private dataService:DataService) {
 
   }
 
+  ngOnInit(): void {
+    this.dataService.currentMessage.subscribe(message => this.message = message);
+    this.dataService.currentUser.subscribe(user => this.loggedInUser = user);
+  }
+
+  newMessage(msg:string):void {
+    this.dataService.changeMessage(msg);
+  }
+
+  newUser(uname:string):void {
+    this.dataService.changeUser(uname);
+  }
+
   doAuth() {
-    this.authRequest.username = this.user.username;
-    this.authRequest.password = this.user.password;
+
+    this.authRequest.auth.username = this.user.username;
+    this.authRequest.auth.password = this.user.password;
+    this.newUser(this.user.username);
+
     this.loginService.authenticateUser(this.authRequest).subscribe(
       success => {
         this.authResult = success;
@@ -51,14 +69,18 @@ export class LoginComponent {
             //console.log(this.user.username);
             this.user.username = '';
             this.user.password = '';
-            this.user.officeid = '';
             this.hideMessages();
+            this.newMessage("HUNCHO JACK JACK HUNCHO");
+          }
+          else if ( this.authResult.status == 'ERROR' ) {
+            this.user.username = '';
+            this.user.password = '';
+            this.showError = true;
           }
         }
       },
       error => {
         console.log(error);
-        //alert('Invalid Password');
         this.showError = true;
       }
     );
@@ -70,7 +92,6 @@ export class LoginComponent {
   }
 
   switchToHomeView() {
-    //console.log( this.authResult );
     this.router.navigate(['/content/dashboard']);
   }
 

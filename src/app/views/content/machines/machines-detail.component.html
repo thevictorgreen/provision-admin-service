@@ -1,0 +1,462 @@
+<div class="animated slideIn">
+
+  <div class="row"><!-- begin row -->
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header"><span style="color:green;">INITIAL HOST DETAILS</span></div>
+        <div class="card-body">
+
+          <div class="form-group">
+            <label for="serial_number">SERIAL NUMBER</label>
+            <input id="serial_number" [(ngModel)]="machine.serial_number" type="text" class="form-control" placeholder="SERIAL NUMBER" readonly>
+          </div>
+
+          <div class="form-group">
+            <label for="make">MAKE</label>
+            <input id="make" [(ngModel)]="machine.make_model.make" type="text" class="form-control" placeholder="MAKE" readonly>
+            <!--<select (change)="getModels()" id="make" [(ngModel)]="machine.make_model.make" class="form-control">
+              <option *ngFor="let make of makes">{{make.make}}</option>
+            </select>-->
+          </div>
+
+          <div class="form-group">
+            <label for="model">MODEL</label>
+            <input id="model" [(ngModel)]="machine.make_model.model" type="text" class="form-control" placeholder="MODEL" readonly>
+            <!--<select id="model" [(ngModel)]="machine.make_model.model" class="form-control">
+              <option *ngFor="let model of models">{{model}}</option>
+            </select>-->
+          </div>
+
+        </div>
+        <div class="card-footer">
+          <button (click)="save()" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i> EDIT</button>
+          <button (click)="remove()" class="btn btn-sm btn-warning"><i class="fa fa-ban"></i> REMOVE</button>
+          <button (click)="cancel()" class="btn btn-sm btn-secondary"><i class="fa fa-ban"></i> CANCEL</button>
+        </div>
+      </div>
+    </div>
+  </div><!-- end row -->
+
+
+  <div class="row"><!-- begin row -->
+    <div class="col-md-12">
+      <div class="card">
+
+        <div *ngIf="machine.mac_addr === '' || machine.it_tasks.unboxed === 'NO' || machine.it_tasks.added_to_inventory === 'NO' || machine.it_tasks.has_initial_config === 'NO'">
+          <div class="card-header"><span style="color:red;">[IN-BOX] STAR IT TASKS</span></div>
+        </div>
+
+        <div *ngIf="machine.mac_addr != '' && machine.it_tasks.unboxed === 'YES' && machine.it_tasks.added_to_inventory === 'YES' && machine.it_tasks.has_initial_config === 'YES'">
+          <div class="card-header"><span style="color:green;">[IN-BOX] STAR IT TASKS</span></div>
+        </div>
+
+        <!--<div class="card-header">[PHASE 2] STAR IT TASKS</div> -->
+        <div class="card-body">
+
+          <div class="form-group">
+            <label for="mac_addr">MAC ADDRESS</label>
+            <input (change)="logChanges($event)" id="machine.mac_addr" [(ngModel)]="machine.mac_addr" type="text" class="form-control" placeholder="MAC ADDRESS">
+          </div>
+
+          <div class="form-group">
+            <!--<input [(ngModel)]="machine.it_tasks.unboxed" type="text" class="form-control" placeholder="UNBOXED">-->
+            <label for="unboxed">MACHINE HAS BEEN UNBOXED</label>
+            <select (change)="logChanges($event)" id="machine.it_tasks.unboxed" [(ngModel)]="machine.it_tasks.unboxed" class="form-control">
+              <option>NO</option>
+              <option>YES</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="added_to_inventory">MACHINE HAS BEEN ADDED TO INVENTORY</label>
+            <!--<input id="added_to_inventory" [(ngModel)]="machine.it_tasks.added_to_inventory" type="text" class="form-control" placeholder="ADDED TO INVENTORY">-->
+            <select (change)="logChanges($event)" id="machine.it_tasks.added_to_inventory" [(ngModel)]="machine.it_tasks.added_to_inventory" class="form-control">
+              <option>NO</option>
+              <option>YES</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="has_initial_config">MACHINE HAS INITIAL CONFIG</label>
+            <!--<input id="has_initial_config" [(ngModel)]="machine.it_tasks.has_initial_config" type="text" class="form-control" placeholder="HAS INITIAL CONFIG">-->
+            <select (change)="logChanges($event)" id="machine.it_tasks.has_intial_config" [(ngModel)]="machine.it_tasks.has_initial_config" class="form-control">
+              <option>NO</option>
+              <option>YES</option>
+            </select>
+          </div>
+
+        </div>
+        <div class="card-footer">
+          <button (click)="save()" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i> EDIT</button>
+          <button (click)="remove()" class="btn btn-sm btn-warning"><i class="fa fa-ban"></i> REMOVE</button>
+          <button (click)="cancel()" class="btn btn-sm btn-secondary"><i class="fa fa-ban"></i> CANCEL</button>
+        </div>
+      </div>
+    </div>
+  </div><!-- end row -->
+
+
+  <div class="row"><!-- begin row -->
+    <div class="col-md-12">
+      <div class="card">
+
+        <div *ngIf="machine.property_custodian === '' || machine.cd_number === '' || machine.property_owner === '' || machine.branch === '' || machine.division === '' ">
+          <div class="card-header"><span style="color:red;">[SETUP] PROPERTY CUSTODIAN TASKS</span></div>
+        </div>
+
+        <div *ngIf="machine.property_custodian != '' && machine.cd_number != '' && machine.property_owner != '' && machine.branch != '' && machine.division != '' ">
+          <div class="card-header"><span style="color:green;">[SETUP] PROPERTY CUSTODIAN TASKS</span></div>
+        </div>
+
+        <div class="card-body">
+
+          <div class="form-group">
+            <label for="property_custodian">PROPERTY CUSTODIAN</label>
+            <input (change)="logChanges($event)" id="machine.property_custodian" [(ngModel)]="machine.property_custodian" type="text" class="form-control" placeholder="PROPERTY CUSTODIAN">
+          </div>
+
+          <div class="form-group">
+            <label for="cd_number">CD NUMBER</label>
+              <input (change)="logChanges($event)" id="machine.cd_number" [(ngModel)]="machine.cd_number" type="text" class="form-control" placeholder="CD NUMBER">
+          </div>
+
+          <div class="form-group">
+            <label for="property_owner">PROPERTY OWNER</label>
+            <input (change)="logChanges($event)" id="machine.property_owner" [(ngModel)]="machine.property_owner" type="text" class="form-control" placeholder="PROPERTY OWNER">
+          </div>
+
+          <div class="form-group">
+            <label for="branch">BRANCH</label>
+            <input (change)="logChanges($event)" id="machine.branch" [(ngModel)]="machine.branch" type="text" class="form-control" placeholder="BRANCH">
+          </div>
+
+          <div class="form-group">
+            <label for="division">DIVISION</label>
+            <input (change)="logChanges($event)" id="machine.division" [(ngModel)]="machine.division" type="text" class="form-control" placeholder="DIVISION">
+          </div>
+
+        </div>
+        <div class="card-footer">
+          <button (click)="save()" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i> EDIT</button>
+          <button (click)="remove()" class="btn btn-sm btn-warning"><i class="fa fa-ban"></i> REMOVE</button>
+          <button (click)="cancel()" class="btn btn-sm btn-secondary"><i class="fa fa-ban"></i> CANCEL</button>
+        </div>
+      </div>
+    </div>
+  </div><!-- end row -->
+
+
+  <div class="row"><!-- begin row -->
+    <div class="col-md-12">
+      <div class="card">
+
+        <div *ngIf="machine.property_owner_tasks.point_of_contact === '' ">
+          <div class="card-header"><span style="color:red;">[SETUP] PROPERTY OWNER TASKS</span></div>
+        </div>
+
+        <div *ngIf="machine.property_owner_tasks.point_of_contact != '' ">
+          <div class="card-header"><span style="color:green;">[SETUP] PROPERTY OWNER TASKS</span></div>
+        </div>
+
+        <!--<div class="card-header">[PHASE 3] PROPERTY OWNER TASKS</div>-->
+        <div class="card-body">
+
+          <div class="form-group">
+            <label for="point_of_contact">POINT OF CONTACT</label>
+            <input (change)="logChanges($event)" id="machine.property_owner_tasks.point_of_contact" [(ngModel)]="machine.property_owner_tasks.point_of_contact" type="text" class="form-control" placeholder="POINT OF CONTACT">
+          </div>
+
+        </div>
+        <div class="card-footer">
+          <button (click)="save()" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i> EDIT</button>
+          <button (click)="remove()" class="btn btn-sm btn-warning"><i class="fa fa-ban"></i> REMOVE</button>
+          <button (click)="cancel()" class="btn btn-sm btn-secondary"><i class="fa fa-ban"></i> CANCEL</button>
+        </div>
+      </div>
+    </div>
+  </div><!-- end row -->
+
+
+  <div class="row"><!-- begin row -->
+    <div class="col-md-12">
+      <div class="card">
+
+        <div *ngIf="machine.point_of_contact_tasks.project === '' || machine.point_of_contact_tasks.use === '' ">
+          <div class="card-header"><span style="color:red;">[SETUP] POINT OF CONTACT TASKS</span></div>
+        </div>
+
+        <div *ngIf="machine.point_of_contact_tasks.project != '' && machine.point_of_contact_tasks.use != '' ">
+          <div class="card-header"><span style="color:green;">[SETUP] POINT OF CONTACT TASKS</span></div>
+        </div>
+
+        <!--<div class="card-header">[PHASE 3] POINT OF CONTACT TASKS</div>-->
+        <div class="card-body">
+
+          <div class="form-group">
+            <label for="project">PROJECT</label>
+            <input (change)="logChanges($event)" id="machine.point_of_contact_tasks.project" [(ngModel)]="machine.point_of_contact_tasks.project" type="text" class="form-control" placeholder="PROJECT">
+          </div>
+
+          <div class="form-group">
+            <label for="use">USE</label>
+            <input (change)="logChanges($event)" id="machine.point_of_contact_tasks.use" [(ngModel)]="machine.point_of_contact_tasks.use" type="text" class="form-control" placeholder="MACHINE USE">
+          </div>
+
+        </div>
+        <div class="card-footer">
+          <button (click)="save()" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i> EDIT</button>
+          <button (click)="remove()" class="btn btn-sm btn-warning"><i class="fa fa-ban"></i> REMOVE</button>
+          <button (click)="cancel()" class="btn btn-sm btn-secondary"><i class="fa fa-ban"></i> CANCEL</button>
+        </div>
+      </div>
+    </div>
+  </div><!-- end row -->
+
+
+  <div class="row"><!-- begin row -->
+    <div class="col-md-12">
+      <div class="card">
+
+        <div *ngIf="machine.point_of_contact_tasks.initial_software_selected === 'NO' ">
+          <div class="card-header"><span style="color:red;">[SETUP] POINT OF CONTACT TASKS</span></div>
+        </div>
+
+        <div *ngIf="machine.point_of_contact_tasks.initial_software_selected === 'YES' ">
+          <div class="card-header"><span style="color:green;">[SETUP] POINT OF CONTACT TASKS</span></div>
+        </div>
+
+        <div class="card-body">
+
+          <div class="form-group">
+            <label>CURRENT INITIAL SOFTWARE REQUESTED</label>
+          </div>
+
+          <div class="form-group" *ngFor="let software of machine.initial_software; index as i">
+            <input [(ngModel)]="machine.initial_software[i]" type="text" class="form-control" placeholder="MODEL">
+            <!--<input [(ngModel)]="make.models[i]" type="text" class="form-control" placeholder="MODEL">-->
+          </div>
+
+          <div class="form-group">
+            <label for="new_user_software">NEW SOFTWARE REQUESTED (COMMA SEPARATED)</label>
+            <input (change)="logChanges($event)" id="new_user_software" [(ngModel)]="new_user_software" type="text" class="form-control" placeholder="NEW SOFTWARE (COMMA SEPARATED)">
+          </div>
+
+          <div class="form-group">
+            <label for="software_selected">INTIAL SOFTWARE SELECTECTION COMPLETE</label>
+            <!--<input id="software_selected" [(ngModel)]="machine.point_of_contact_tasks.initial_software_selected" type="text" class="form-control" placeholder="INITIAL SOFTWARE SELECTED">-->
+            <select (change)="logChanges($event)" id="machine.point_of_contact_tasks.initial_software_selected" [(ngModel)]="machine.point_of_contact_tasks.initial_software_selected" class="form-control">
+              <option>NO</option>
+              <option>YES</option>
+            </select>
+          </div>
+
+        </div>
+        <div class="card-footer">
+          <button (click)="saveUserSoftwareChanges()" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i> EDIT</button>
+          <button (click)="cancel()" class="btn btn-sm btn-secondary"><i class="fa fa-ban"></i> CANCEL</button>
+        </div>
+      </div>
+    </div>
+  </div><!-- end row -->
+
+
+  <div class="row"><!-- begin row -->
+    <div class="col-md-12">
+      <div class="card">
+
+        <div *ngIf="machine.it_tasks.has_available_rack === 'NO' || machine.it_tasks.has_available_pdu === 'NO' ">
+          <div class="card-header"><span style="color:red;">[SETUP] STAR IT TASKS</span></div>
+        </div>
+
+        <div *ngIf="machine.it_tasks.has_available_rack === 'YES' && machine.it_tasks.has_available_pdu === 'YES' ">
+          <div class="card-header"><span style="color:green;">[SETUP] STAR IT TASKS</span></div>
+        </div>
+
+        <!--<div class="card-header">[PHASE 3] STAR IT TASKS</div>-->
+        <div class="card-body">
+
+          <div class="form-group">
+            <label for="has_available_rack">MACHINE HAS AVAILABLE RACK</label>
+            <!--<input id="has_available_rack" [(ngModel)]="machine.it_tasks.has_available_rack" type="text" class="form-control" placeholder="HAS AVAILABLE RACK">-->
+            <select (change)="logChanges($event)" id="machine.it_tasks.has_available_rack" [(ngModel)]="machine.it_tasks.has_available_rack" class="form-control">
+              <option>NO</option>
+              <option>YES</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="has_available_pdu">MACHINE HAS AVAILABLE PDU</label>
+            <!--<input id="has_available_pdu" [(ngModel)]="machine.it_tasks.has_available_pdu" type="text" class="form-control" placeholder="HAS AVAILABLE PDU">-->
+            <select (change)="logChanges($event)" id="machine.it_tasks.has_available_pdu" [(ngModel)]="machine.it_tasks.has_available_pdu" class="form-control">
+              <option>NO</option>
+              <option>YES</option>
+            </select>
+          </div>
+
+        </div>
+        <div class="card-footer">
+          <button (click)="save()" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i> EDIT</button>
+          <button (click)="remove()" class="btn btn-sm btn-warning"><i class="fa fa-ban"></i> REMOVE</button>
+          <button (click)="cancel()" class="btn btn-sm btn-secondary"><i class="fa fa-ban"></i> CANCEL</button>
+        </div>
+      </div>
+    </div>
+  </div><!-- end row -->
+
+
+  <div class="row"><!-- begin row -->
+    <div class="col-md-12">
+      <div class="card">
+
+        <div *ngIf="machine.maintenance_tasks.has_available_power === 'NO' ">
+          <div class="card-header"><span style="color:red;">[SETUP] MAINTENANCE TASKS</span></div>
+        </div>
+
+        <div *ngIf="machine.maintenance_tasks.has_available_power === 'YES' ">
+          <div class="card-header"><span style="color:green;">[SETUP] MAINTENANCE TASKS</span></div>
+        </div>
+
+        <!--<div class="card-header">[PHASE 3] MAINTENANCE TASKS</div>-->
+        <div class="card-body">
+
+          <div class="form-group">
+            <label for="has_avaiable_power">HAS AVAILABLE POWER</label>
+            <!--<input id="has_available_power" [(ngModel)]="machine.maintenance_tasks.has_available_power" type="text" class="form-control" placeholder="HAS AVAILABLE POWER">-->
+            <select (change)="logChanges($event)" id="machine.maintenance_tasks.has_available_power" [(ngModel)]="machine.maintenance_tasks.has_available_power" class="form-control">
+              <option>NO</option>
+              <option>YES</option>
+            </select>
+          </div>
+
+        </div>
+        <div class="card-footer">
+          <button (click)="save()" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i> EDIT</button>
+          <button (click)="remove()" class="btn btn-sm btn-warning"><i class="fa fa-ban"></i> REMOVE</button>
+          <button (click)="cancel()" class="btn btn-sm btn-secondary"><i class="fa fa-ban"></i> CANCEL</button>
+        </div>
+      </div>
+    </div>
+  </div><!-- end row -->
+
+
+  <div class="row"><!-- begin row -->
+    <div class="col-md-12">
+      <div class="card">
+
+        <div *ngIf="machine.network_tasks.configured_port === 'NO' ">
+          <div class="card-header"><span style="color:red;">[SETUP] NCEP NETWORK TASKS</span></div>
+        </div>
+
+        <div *ngIf="machine.network_tasks.configured_port === 'YES' ">
+          <div class="card-header"><span style="color:green;">[SETUP] NCEP NETWORK TASKS</span></div>
+        </div>
+
+        <!--<div class="card-header">[PHASE 3] NCEP NETWORK TASKS</div>-->
+        <div class="card-body">
+
+          <div class="form-group">
+            <label for="configured_port">CONFIGURED PORT</label>
+            <!--<input id="configured_port" [(ngModel)]="machine.network_tasks.configured_port" type="text" class="form-control" placeholder="PORT CONFIGURED">-->
+            <select (change)="logChanges($event)" id="machine.network_tasks.configured_port" [(ngModel)]="machine.network_tasks.configured_port" class="form-control">
+              <option>NO</option>
+              <option>YES</option>
+            </select>
+          </div>
+
+        </div>
+        <div class="card-footer">
+          <button (click)="save()" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i> EDIT</button>
+          <button (click)="remove()" class="btn btn-sm btn-warning"><i class="fa fa-ban"></i> REMOVE</button>
+          <button (click)="cancel()" class="btn btn-sm btn-secondary"><i class="fa fa-ban"></i> CANCEL</button>
+        </div>
+      </div>
+    </div>
+  </div><!-- end row -->
+
+
+  <div class="row"><!-- begin row -->
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header"><span style="color:green;">STAR SOFTWARE</span></div>
+        <div class="card-body">
+
+          <div class="form-group">
+            <label>CURRENT</label>
+          </div>
+
+          <div class="form-group" *ngFor="let software of machine.initial_star_software; index as i">
+            <div *ngIf="i <= 2">
+              <input [(ngModel)]="machine.initial_star_software[i]" type="text" class="form-control" placeholder="MODEL" readonly>
+            </div>
+
+            <div *ngIf="i >= 3">
+              <input [(ngModel)]="machine.initial_star_software[i]" type="text" class="form-control" placeholder="MODEL">
+            </div>
+            <!--<input [(ngModel)]="make.models[i]" type="text" class="form-control" placeholder="MODEL">-->
+          </div>
+
+          <div class="form-group">
+            <label for="new_star_software">NEW (COMMA SEPARATED)</label>
+            <input (change)="logChanges($event)" id="new_star_software" [(ngModel)]="new_star_software" type="text" class="form-control" placeholder="NEW SOFTWARE (COMMA SEPARATED)">
+          </div>
+
+        </div>
+        <div class="card-footer">
+          <button (click)="saveStarSoftwareChanges()" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i> EDIT</button>
+          <button (click)="cancel()" class="btn btn-sm btn-secondary"><i class="fa fa-ban"></i> CANCEL</button>
+        </div>
+      </div>
+    </div>
+  </div><!-- end row -->
+
+
+  <div class="row"><!-- begin row -->
+    <div class="col-md-12">
+      <div class="card">
+
+        <div *ngIf="machine.hostname === '' || machine.it_tasks.moved_to_datacenter === 'NO' || machine.it_tasks.initial_software_installed === 'NO' ">
+          <div class="card-header"><span style="color:red;">[SETUP] STAR IT TASKS</span></div>
+        </div>
+
+        <div *ngIf="machine.hostname != '' && machine.it_tasks.moved_to_datacenter === 'YES' && machine.it_tasks.initial_software_installed === 'YES' ">
+          <div class="card-header"><span style="color:green;">[SETUP] STAR IT TASKS</span></div>
+        </div>
+
+        <!--<div class="card-header">[PHASE 4] STAR IT TASKS</div>-->
+        <div class="card-body">
+
+          <div class="form-group">
+            <label for="hostname">HOSTNAME</label>
+            <input (change)="logChanges($event)" id="machine.hostname" [(ngModel)]="machine.hostname" type="text" class="form-control" placeholder="HOSTNAME">
+          </div>
+
+          <div class="form-group">
+            <label for="datacenter">MOVED TO DATACENTER</label>
+            <!--<input id="datacenter" [(ngModel)]="machine.it_tasks.moved_to_datacenter" type="text" class="form-control" placeholder="MOVED TO DATACENTER">-->
+            <select (change)="logChanges($event)" id="machine.it_tasks.moved_to_datacenter" [(ngModel)]="machine.it_tasks.moved_to_datacenter" class="form-control">
+              <option>NO</option>
+              <option>YES</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="software_installed">INITIAL SOFTWARE INSTALLED</label>
+            <!--<input id="software_installed" [(ngModel)]="machine.it_tasks.initial_software_installed" type="text" class="form-control" placeholder="INITIAL SOFTWARE INSTALLED">-->
+            <select (change)="logChanges($event)" id="machine.it_tasks.initial_software_installed" [(ngModel)]="machine.it_tasks.initial_software_installed" class="form-control">
+              <option>NO</option>
+              <option>YES</option>
+            </select>
+          </div>
+
+        </div>
+        <div class="card-footer">
+          <button (click)="save()" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i> EDIT</button>
+          <button (click)="remove()" class="btn btn-sm btn-warning"><i class="fa fa-ban"></i> REMOVE</button>
+          <button (click)="cancel()" class="btn btn-sm btn-secondary"><i class="fa fa-ban"></i> CANCEL</button>
+        </div>
+      </div>
+    </div>
+  </div><!-- end row -->
+
+
+</div>
